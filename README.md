@@ -2,7 +2,7 @@
 This python script will block websites listed in its config file for a set amount of time also set in its config file.
 The script only works on Windows for now, but it could be ported to other operating systems using its config file and making other tweaks.
 
-You must turn off "Use a prediction service to load pages more quickly" in Google Chrome for it to work in the Chrome browser
+You must turn off "Use a prediction service to load pages more quickly" in Google Chrome for it to work in the Chrome browser.
 
 
 

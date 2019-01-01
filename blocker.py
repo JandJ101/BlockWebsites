@@ -3,6 +3,7 @@ import config
 import os
 import time
 import sys
+import platform
 import psutil
 
 hostsPath = config.hostsPath
@@ -31,15 +32,39 @@ if "#timetillend" in open(hostsPath).read():
 
 input("This program will restart all web browsers. Press enter to continue.")
 
+def killByProcessName(name):
+    PROCNAME = 'python.exe'
+    for proc in psutil.process_iter():
+        if proc.name == PROCNAME:
+            p = psutil.Process(proc.pid)
+            if not 'SYSTEM' in p.username:
+                proc.kill()
+
+    #print("Not found process: " + name)
+
+
 def closeBrowsers():
+    #print(os.name)
     browsersToClose = config.webBrowsers
-    i=0
-    while i < len(browsersToClose):
-        if browsersToClose[i] in (p.name() for p in psutil.process_iter()):
-            print(browsersToClose[i] + " is running")
-            os.system("TASKKILL /F /IM " + browsersToClose[i])
-            print("Closed " + browsersToClose[i])
-        i+=1
+
+    if platform.system() == "Darwin":
+        print("macos")
+        i=0
+        while i < len(browsersToClose):
+            if browsersToClose[i] in (p.name() for p in psutil.process_iter()):
+                print(browsersToClose[i] + " is running")
+                os.system("killall " + browsersToClose[i].replace(" ", '\\ ' ))
+                print("Closed " + browsersToClose[i])
+            i+=1
+
+    if platform.system() == "Windows":
+        i=0
+        while i < len(browsersToClose):
+            if browsersToClose[i] in (p.name() for p in psutil.process_iter()):
+                print(browsersToClose[i] + " is running")
+                os.system("TASKKILL /F /IM " + browsersToClose[i])
+                print("Closed " + browsersToClose[i])
+            i+=1
 
 closeBrowsers()
 

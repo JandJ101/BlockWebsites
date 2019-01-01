@@ -19,6 +19,5 @@ blockSites = ["blockThisSite.com", "blockThisSiteToo.com"]
 change the variable **time** to a value in minutes. *Note: The value must be an integer.*
 *Example:*
 time = 60
-time = 120
 
 Most of the other settings can be left at default.

@@ -22,7 +22,8 @@ if "#timetillend" in open(hostsPath).read():
     lineNum = findTextLine("#timetillend")
     fileToExtract = open(hostsPath).readlines()
     lineOftime = fileToExtract[lineNum - 1]
-    waitTime = int(lineOftime.split("#timetillend", 1)[1])
+    newTime = lineOftime.split("#timetillend", 1)[1]
+    waitTime = int(newTime)
     print("Your time is still " + str(newTime) +
           " minute(s) until timer completes")
 
